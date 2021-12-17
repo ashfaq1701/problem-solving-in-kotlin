@@ -1,0 +1,2 @@
+package ae.veryHard.smallestSubstringContaining.solution1
+
