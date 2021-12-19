@@ -1,5 +1,5 @@
-import playground.listTest
+import playground.dateTest
 
 fun main(args: Array<String>) {
-    listTest()
+    dateTest()
 }
