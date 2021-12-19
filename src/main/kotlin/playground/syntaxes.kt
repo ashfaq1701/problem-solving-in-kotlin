@@ -537,3 +537,15 @@ fun dateTest() {
     gregorianCalendar2.add(Calendar.MONTH, 2)
     gregorianCalendar2.add(Calendar.YEAR, 3)
 }
+
+fun miscTest() {
+    val pairData = 1 to "One"
+    val (i1, str) = pairData
+
+    val tripleData = Triple(1, "One", "ek")
+    val (i2, eStr1, bStr) = tripleData
+
+    fun String.hasSpaces() = find { it == ' ' } != null
+
+    println("This string has string".hasSpaces())
+}
