@@ -116,6 +116,7 @@ fun listTest() {
     val mutableList1 = mutableListOf(1, 2, 3, 4, 5)
     val mutableList2 = MutableList(5) { it * 2 }
     mutableList1.contains(3)
+    println(mutableList1.indexOf(3))
     mutableList1.remove(3)
     mutableList1.add(2, 8)
     mutableList1.removeAt(3)
