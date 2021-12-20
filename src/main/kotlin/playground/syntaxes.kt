@@ -120,6 +120,7 @@ fun listTest() {
     mutableList1.remove(3)
     mutableList1.add(2, 8)
     mutableList1.removeAt(3)
+    println(mutableList1.first())
     println(mutableList1)
 
     val arrayList = ArrayList<Int>(5)
