@@ -90,7 +90,7 @@ data class StringMeeting(val start: String, val end: String) {
 }
 
 data class IntMeeting(var start: Int, var end: Int) {
-    fun toStringMeeting() = StringMeeting(toStringTime(start), toStringTime(end))
+    private fun toStringMeeting() = StringMeeting(toStringTime(start), toStringTime(end))
 
     fun toListBounds(): List<String> {
         val stringMeeting = toStringMeeting()
