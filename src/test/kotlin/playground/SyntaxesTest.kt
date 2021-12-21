@@ -116,12 +116,21 @@ class SyntaxesTest {
 
     @Test
     fun listTest() {
+        // Specific index from list (ex list[3]) will be not-nullable (ex Int)
+        // Specific index from map (ex map["three"]) will be nullable (ex Int?)
+
         val immutableList1 = listOf(1, 2, 3, 4, 5)
         val immutableList2 = List(5) { it * 2 }
         val mutableList1 = mutableListOf(1, 2, 3, 4, 5)
         val mutableList2 = MutableList(5) { it * 2 }
 
+        val element1DArr = immutableList1[3]
+
+        val twoDArray = List<List<Int>>(3) { List<Int>(3) { 0 } }
+        val element2DArr = twoDArray[1][1]
+
         mutableList1.contains(3)
+        mutableList1.toList()
         println(mutableList1.indexOf(3))
         mutableList1.remove(3)
         mutableList1.add(2, 8)
@@ -144,6 +153,9 @@ class SyntaxesTest {
         mutableMap[5] = "Five"
         mutableMap.put(6, "Six")
         mutableMap.containsKey(5)
+
+        val elementMap = mutableMap[4]
+
         mutableMap[4]?.let {
             println("$it found for key 4")
         }
@@ -220,6 +232,7 @@ class SyntaxesTest {
     fun stringTest() {
         val string = "Hello world!"
         println(string[1])
+        println(string.length)
 
         println(string.substring(6))
         println(string.substring(6, 9))
