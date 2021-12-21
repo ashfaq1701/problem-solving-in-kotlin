@@ -161,6 +161,8 @@ class SyntaxesTest {
         hashMap.put(4, "Four")
         hashMap.containsKey(4)
 
+        val value = hashMap.getValue(2)
+
         immutableMap.keys.forEach {
             println("Key is $it")
         }
