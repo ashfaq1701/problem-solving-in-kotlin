@@ -147,6 +147,12 @@ class SyntaxesTest {
             println("$it found for key 4")
         }
 
+        println(mutableMap.values.maxOrNull())
+
+        val list = listOf("a", "b")
+        val (s1, s2) = list
+        println("$s1 , $s2")
+
         val hashMap = HashMap<Int, String>()
         hashMap[1] = "One"
         hashMap[2] = "Two"
