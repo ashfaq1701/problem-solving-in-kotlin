@@ -124,6 +124,13 @@ class SyntaxesTest {
         val mutableList1 = mutableListOf(1, 2, 3, 4, 5)
         val mutableList2 = MutableList(5) { it * 2 }
 
+        mutableList2.sortedWith { i, j ->
+            (i % 3).compareTo(j % 3)
+        }
+
+        mutableList2.reverse()
+        println(mutableList1.reversed())
+
         val element1DArr = immutableList1[3]
 
         val twoDArray = List<List<Int>>(3) { List<Int>(3) { 0 } }
@@ -186,6 +193,22 @@ class SyntaxesTest {
         mutableMap.remove(6)
         immutableMap.toSortedMap()
         immutableMap.values.sorted()
+
+        data class StringChain(val nextStringInChain: String, val stringChainLen: Int)
+
+        val strings = listOf("abcdef", "abcdefghi", "abcde", "abcdefg", "abc", "abcdefgh", "abcdefghij")
+        val stringChains = strings.associateWith {
+            StringChain("", 1)
+        }.toMutableMap()
+
+        val another = strings.associate { it to StringChain("", 1) }.toMutableMap()
+
+        val another1 = strings.associateBy { "$it-key" }.toMutableMap()
+        println(another1)
+
+        val sortedStrings = strings.sortedWith { str1, str2 ->
+            str1.length.compareTo(str2.length)
+        }
 
         val valueCollection = mutableMap.values
 
@@ -274,6 +297,7 @@ class SyntaxesTest {
         }
     }
 
+    @Test
     fun functionalManipulationTest() {
         val nums = listOf(3, 6, 9, 19, 2, 98, 56, 43, 21, 12, 101, 103, 203, 204, 65, 75, 69, 17, 19, 96, 92, 14, 18, 23, 26, 28, 26, 34, 43, 46, 62, 74, 82, 97, 83)
         val evenOdd = nums.map {
