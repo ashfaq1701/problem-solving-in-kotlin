@@ -123,6 +123,10 @@ class SyntaxesTest {
         val immutableList2 = List(5) { it * 2 }
         val mutableList1 = mutableListOf(1, 2, 3, 4, 5)
         val mutableList2 = MutableList(5) { it * 2 }
+        val removedElement = mutableList1.removeLast()
+        val anotherRemovedElement = mutableList2.removeAt(mutableList2.lastIndex)
+
+        mutableList1.toSet()
 
         mutableList2.sortedWith { i, j ->
             (i % 3).compareTo(j % 3)
@@ -468,7 +472,7 @@ class SyntaxesTest {
         sortedMap[1] = "One"
         sortedMap[2] = "Two"
         sortedMap[3] = "Three"
-        sortedMap.mapValues { (_, v) ->
+        val mappedMap = sortedMap.mapValues { (_, v) ->
             "$v-modified"
         }
         val newMap3: SortedMap<Int, String> = sortedMap.mapKeys { (k, _) ->
