@@ -23,18 +23,23 @@ fun longestStringChain(strings: List<String>): List<String> {
     }
      */
 
+    // Sort the strings array by length for ease in implementation. Sorting guarantees that
+    // the shorter string is computed before the present longer string
     val sortedStrings = strings.sortedWith(Comparator<String> { str1, str2 ->
         str1.length.compareTo(str2.length)
     })
 
+    // Iterate through each string and prepare the map of string -> stringChain object
     val stringChains = sortedStrings.associateWith {
         StringChain("", 1)
     }.toMutableMap()
 
+    // Find the longest string chain for each string from shortest to longest string
     sortedStrings.forEach { str ->
         findLongestStringChain(str, stringChains)
     }
 
+    // Find the overall longest string chain, build the sequence and return the chain
     return buildLongestStringChains(strings, stringChains)
 }
 
@@ -54,6 +59,7 @@ fun updateLongestStringChain(currentString: String, nextString: String, stringCh
     val currentStringChainLen = stringChains[currentString]!!.stringChainLen
     val nextStringChainLen = stringChains[nextString]!!.stringChainLen
 
+    // Does using this next string makes the chain longer?
     if (nextStringChainLen + 1 > currentStringChainLen) {
         stringChains[currentString]?.nextStringInChain = nextString
         stringChains[currentString]?.stringChainLen = nextStringChainLen + 1
