@@ -594,6 +594,11 @@ class SyntaxesTest {
         gregorianCalendar2.add(Calendar.DATE, 5)
         gregorianCalendar2.add(Calendar.MONTH, 2)
         gregorianCalendar2.add(Calendar.YEAR, 3)
+
+        val set = mutableSetOf(1, 3, 5, 1, 4, 2, 3, 2, 2)
+        println(set.toMutableList())
+        println(set.toList())
+        println(set.toSet())
     }
 
     @Test
