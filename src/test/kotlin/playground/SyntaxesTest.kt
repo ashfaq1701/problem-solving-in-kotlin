@@ -128,6 +128,12 @@ class SyntaxesTest {
 
         mutableList1.toSet()
 
+        val copiedList = immutableList1.toList()
+        val copiedList2 = immutableList1.toMutableList()
+
+        println(immutableList1.subList(0, 2))
+        println(immutableList1.subList(2, immutableList1.size))
+
         mutableList2.sortedWith { i, j ->
             (i % 3).compareTo(j % 3)
         }
