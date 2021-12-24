@@ -1,4 +1,4 @@
-package ae.easy.palindromeCheck.solution1
+package ae.easy.palindromeCheck.solution2
 
 fun isPalindrome(string: String): Boolean {
     var left = 0
