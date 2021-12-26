@@ -1,4 +1,4 @@
-package ae.medium.minHeightBST.solution1
+package ae.medium.minHeightBST.solution2
 
 open class BST(value: Int) {
     var value = value
@@ -29,18 +29,19 @@ fun minHeightBst(array: List<Int>): BST {
 fun constructMinHeightBST(array: List<Int>, bst: BST?, startIdx: Int, endIdx: Int): BST? {
     if (endIdx < startIdx) return null
 
-    var rootBst = bst
     val midIdx = (startIdx + endIdx) / 2
-    val valueToAdd = array[midIdx]
+    val newBSTNode = BST(array[midIdx])
 
-    if (rootBst == null) {
-        rootBst = BST(valueToAdd)
-    } else {
-        rootBst.insert(valueToAdd)
+    if (bst != null) {
+        if (array[midIdx] < bst.value) {
+            bst.left = newBSTNode
+        } else {
+            bst.right = newBSTNode
+        }
     }
 
-    constructMinHeightBST(array, rootBst, startIdx, midIdx - 1)
-    constructMinHeightBST(array, rootBst, midIdx + 1, endIdx)
+    constructMinHeightBST(array, newBSTNode, startIdx, midIdx - 1)
+    constructMinHeightBST(array, newBSTNode, midIdx + 1, endIdx)
 
-    return rootBst
+    return newBSTNode
 }

@@ -1,2 +1,0 @@
-package ae.medium.minNumberOfWaysToTraverseGraph.solution1
-
