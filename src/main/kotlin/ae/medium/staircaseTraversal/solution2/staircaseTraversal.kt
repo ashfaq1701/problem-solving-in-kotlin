@@ -9,11 +9,9 @@ fun staircaseTraversal(height: Int, maxSteps: Int): Int {
     waysToTop[1] = 1
 
     for (currentHeight in 2 .. height) {
-        var step = 1
 
-        while (step <= min(currentHeight, maxSteps)) {
+        for (step in 1 .. min(currentHeight, maxSteps)) {
             waysToTop[currentHeight] += waysToTop[currentHeight - step]
-            step += 1
         }
     }
 
