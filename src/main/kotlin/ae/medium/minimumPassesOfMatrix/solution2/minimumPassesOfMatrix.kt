@@ -1,4 +1,4 @@
-package ae.medium.minimumPassesOfMatrix.solution1
+package ae.medium.minimumPassesOfMatrix.solution2
 
 import java.util.LinkedList
 
@@ -8,16 +8,15 @@ fun minimumPassesOfMatrix(matrix: MutableList<MutableList<Int>>): Int {
 }
 
 fun convertNegatives(matrix: MutableList<MutableList<Int>>): Int {
-    var nextPassQueue = getPositiveIndices(matrix)
+    var queue = getPositiveIndices(matrix)
 
     var passes = 0
 
-    while (nextPassQueue.isNotEmpty()) {
-        val currentPassQueue = nextPassQueue
-        nextPassQueue = LinkedList<List<Int>>()
+    while (queue.isNotEmpty()) {
+        var currentSize = queue.size
 
-        while (currentPassQueue.isNotEmpty()) {
-            val (currentRow, currentCol) = currentPassQueue.poll()
+        while (currentSize > 0) {
+            val (currentRow, currentCol) = queue.poll()
             val neighbors = getNeighbors(currentRow, currentCol, matrix)
 
             for (neighbor in neighbors) {
@@ -25,9 +24,10 @@ fun convertNegatives(matrix: MutableList<MutableList<Int>>): Int {
 
                 if (matrix[neighborR][neighborC] < 0) {
                     matrix[neighborR][neighborC] *= -1
-                    nextPassQueue.add(neighbor)
+                    queue.add(neighbor)
                 }
             }
+            currentSize -= 1
         }
 
         passes += 1
