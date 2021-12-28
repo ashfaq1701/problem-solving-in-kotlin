@@ -29,7 +29,7 @@ fun dijkstrasAlgorithm(start: Int, edges: List<List<List<Int>>>): List<Int> {
             break
         }
 
-        // For every node of this vertex with min distance
+        // For every neighbor of this vertex with min distance
         for ((destination, distanceToDestination) in edges[minDistanceVertex]) {
 
             // Calculate new distance as sum of current min distance and the distance from current node
