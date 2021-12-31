@@ -1,4 +1,4 @@
-package ae.hard.numbersInPi.solution1
+package ae.hard.numbersInPi.solution2
 
 import kotlin.math.min
 
@@ -9,9 +9,12 @@ fun numbersInPi(pi: String, numbers: List<String>): Int {
     }
 
     val cache = mutableMapOf<Int, Int>()
-    val minSpaces = getMinSpaces(pi, numbersSet, cache, 0)
 
-    return if (minSpaces == Integer.MAX_VALUE) -1 else minSpaces
+    for (idx in pi.lastIndex downTo 0) {
+        val minSpaces = getMinSpaces(pi, numbersSet, cache, idx)
+    }
+
+    return if (cache[0]!! == Integer.MAX_VALUE) -1 else cache[0]!!
 }
 
 fun getMinSpaces(pi: String, numbersSet: Set<String>, cache: MutableMap<Int, Int>, idx: Int): Int {
