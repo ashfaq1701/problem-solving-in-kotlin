@@ -3,7 +3,6 @@ package ae.hard.continuousMedian.solution1
 import java.util.PriorityQueue
 
 open class ContinuousMedianHandler() {
-    // Write your code here.
     private var median: Double? = null
 
     val lowers = PriorityQueue<Int>(Comparator<Int> { i1, i2 ->

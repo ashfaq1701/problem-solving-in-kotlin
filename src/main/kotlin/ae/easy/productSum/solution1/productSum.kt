@@ -1,7 +1,6 @@
 package ae.easy.productSum.solution1
 
 fun productSum(array: List<*>, multiplier: Int = 1): Int {
-    // Write your code here.
     var sum = 0;
 
     for (e1 in array) {
