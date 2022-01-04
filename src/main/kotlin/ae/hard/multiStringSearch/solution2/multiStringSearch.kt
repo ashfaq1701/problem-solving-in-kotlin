@@ -1,5 +1,6 @@
 package ae.hard.multiStringSearch.solution2
 
+// O(b^2 + ns) Time | O(b^2 + n) Space
 fun multiStringSearch(bigString: String, smallStrings: List<String>): List<Boolean> {
     val suffixTrie = ModifiedSuffixTree(bigString)
 
