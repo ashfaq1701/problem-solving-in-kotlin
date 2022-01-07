@@ -10,21 +10,27 @@ fun longestIncreasingMatrixPath(matrix: List<List<Int>>): Int {
     var longestPathLen = 0
     for (r in matrix.indices) {
         for (c in matrix[0].indices) {
-            longestPathLen = max(longestPathLen, dfs(matrix, r, c, cache))
+            longestPathLen = max(
+                longestPathLen,
+                getLongestIncreasingPathAt(matrix, r, c, cache)
+            )
         }
     }
 
     return longestPathLen
 }
 
-fun dfs(matrix: List<List<Int>>, r: Int, c: Int, cache: MutableList<MutableList<Int>>): Int {
+fun getLongestIncreasingPathAt(matrix: List<List<Int>>, r: Int, c: Int, cache: MutableList<MutableList<Int>>): Int {
     if (cache[r][c] > 0) return cache[r][c]
 
     var maxLen = 0
 
     for ((adjR, adjC) in getNeighbors(matrix, r, c)) {
         if (matrix[adjR][adjC] > matrix[r][c]) {
-            maxLen = max(maxLen, dfs(matrix, adjR, adjC, cache))
+            maxLen = max(
+                maxLen,
+                getLongestIncreasingPathAt(matrix, adjR, adjC, cache)
+            )
         }
     }
 
