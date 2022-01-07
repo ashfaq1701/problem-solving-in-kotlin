@@ -4,7 +4,7 @@ import kotlin.math.max
 
 fun longestIncreasingMatrixPath(matrix: List<List<Int>>): Int {
     val cache = MutableList(matrix.size) {
-        MutableList(matrix[0].size) { 0 }
+        MutableList<Int?>(matrix[0].size) { null }
     }
 
     var longestPathLen = 0
@@ -12,7 +12,8 @@ fun longestIncreasingMatrixPath(matrix: List<List<Int>>): Int {
         for (c in matrix[0].indices) {
             longestPathLen = max(
                 longestPathLen,
-                getLongestIncreasingPathAt(matrix, r, c, cache)
+                // MIN_VALUE as lastPathValue because now this node is the starting node
+                getLongestIncreasingPathAt(matrix, r, c, Int.MIN_VALUE, cache)
             )
         }
     }
@@ -20,22 +21,22 @@ fun longestIncreasingMatrixPath(matrix: List<List<Int>>): Int {
     return longestPathLen
 }
 
-fun getLongestIncreasingPathAt(matrix: List<List<Int>>, r: Int, c: Int, cache: MutableList<MutableList<Int>>): Int {
-    if (cache[r][c] > 0) return cache[r][c]
+fun getLongestIncreasingPathAt(matrix: List<List<Int>>, r: Int, c: Int, lastPathValue: Int, cache: MutableList<MutableList<Int?>>): Int {
+    val currentValue = matrix[r][c]
+    if (currentValue <= lastPathValue) return 0
+
+    if (cache[r][c] != null) return cache[r][c]!!
 
     var maxLen = 0
-
     for ((adjR, adjC) in getNeighbors(matrix, r, c)) {
-        if (matrix[adjR][adjC] > matrix[r][c]) {
-            maxLen = max(
-                maxLen,
-                getLongestIncreasingPathAt(matrix, adjR, adjC, cache)
-            )
-        }
+        maxLen = max(
+            maxLen,
+            getLongestIncreasingPathAt(matrix, adjR, adjC, currentValue, cache)
+        )
     }
-
     cache[r][c] = maxLen + 1
-    return cache[r][c]
+
+    return cache[r][c]!!
 }
 
 fun getNeighbors(matrix: List<List<Int>>, row: Int, col: Int): List<Pair<Int, Int>> {
