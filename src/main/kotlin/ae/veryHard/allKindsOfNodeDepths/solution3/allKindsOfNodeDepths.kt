@@ -1,5 +1,13 @@
 package ae.veryHard.allKindsOfNodeDepths.solution3
 
+/**
+ * Formula:
+ *
+ * #n = #L + #R + 1
+ * nD = nDL + #L + nDR + #R
+ * aND = nD + aNDL + aNDR
+ */
+
 open class BinaryTree(value: Int) {
     var value = value
     var left: BinaryTree? = null
