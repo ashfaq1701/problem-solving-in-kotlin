@@ -6,7 +6,7 @@ import kotlin.math.max
  * prices ->   [ 5, 11,  3, 50, 60, 90 ]
  *           0   0   0   0   0   0   0
  * profit -> 1   0   6   6  47  57  87
- *           2   0   6   6  53  63
+ *           2   0   6   6  53  63  93
  *
  * profit[t][d] = max { 1) profit[t][d - 1]
  *                      2) prices[d] + max(-prices[x] + profit[t - 1][x])
