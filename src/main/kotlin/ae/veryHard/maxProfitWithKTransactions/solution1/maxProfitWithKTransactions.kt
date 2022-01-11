@@ -20,7 +20,7 @@ import kotlin.math.max
  *                       1)                     profit[t][d - 1]
  *                                      Price of current day (income)                     Price of xth day (bought at this price, expense)     Profit till xth day with one less (t - 1) number of transactions
  * profit[t][d] = max {  2)                     prices[d]            +             max(                    -prices[x]                       +                      profit[t - 1][x]                              )
- *                                                         This will be calculated from 0th day till the last day (d - 1)
+ *                                                         x will range from 0th day till the last day (d - 1)
  *                                                                                 0 <= x < d
  */
 
