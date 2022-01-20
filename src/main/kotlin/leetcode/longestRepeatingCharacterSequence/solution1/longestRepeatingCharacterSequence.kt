@@ -17,7 +17,6 @@ class Solution {
 
             while (right - left + 1 - maxCount > k) {
                 charCounts[s[left] - 'A'] -= 1
-                maxCount = max(maxCount,  charCounts[s[left] - 'A'])
                 left += 1
             }
 
