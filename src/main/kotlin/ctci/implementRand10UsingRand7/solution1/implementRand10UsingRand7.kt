@@ -1,0 +1,2 @@
+package ctci.implementRand10UsingRand7.solution1
+
