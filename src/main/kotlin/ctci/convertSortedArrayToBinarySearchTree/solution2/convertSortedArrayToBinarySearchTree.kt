@@ -1,4 +1,4 @@
-package ctci.convertSortedArrayToBinarySearchTree.solution1
+package ctci.convertSortedArrayToBinarySearchTree.solution2
 
 class TreeNode(var `val`: Int) {
     var left: TreeNode? = null
@@ -13,7 +13,7 @@ class Solution {
     fun createBST(nums: IntArray, left: Int, right: Int): TreeNode? {
         if (left > right) return null
 
-        val mid = (left + right) / 2
+        val mid = (left + right + 1) / 2
         val node = TreeNode(nums[mid])
         node.left = createBST(nums, left, mid - 1)
         node.right = createBST(nums, mid + 1, right)
