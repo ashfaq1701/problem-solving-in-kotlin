@@ -1,4 +1,4 @@
-package ctci.pathSumIII.solution1
+package ctci.pathSumIII.solution2
 
 class TreeNode(var `val`: Int) {
     var left: TreeNode? = null
@@ -7,13 +7,13 @@ class TreeNode(var `val`: Int) {
 
 class Solution {
     fun pathSum(root: TreeNode?, targetSum: Int): Int {
-        val sumCounts = mapOf<Int, Int>()
+        val sumCounts = mutableMapOf<Int, Int>()
         val treeInfo = TreeInfo()
         pathSumHelper(root, 0, sumCounts, treeInfo, targetSum)
         return treeInfo.pathSumCount
     }
 
-    fun pathSumHelper(node: TreeNode?, prevSum: Int, sumCounts: Map<Int, Int>, treeInfo: TreeInfo, targetSum: Int) {
+    fun pathSumHelper(node: TreeNode?, prevSum: Int, sumCounts: MutableMap<Int, Int>, treeInfo: TreeInfo, targetSum: Int) {
         if (node == null) return
 
         val currentSum = prevSum + node.`val`
@@ -24,10 +24,15 @@ class Solution {
 
         treeInfo.pathSumCount += sumCounts.getOrDefault(currentSum - targetSum, 0)
 
-        val newSumCounts = sumCounts.plus(currentSum to sumCounts.getOrDefault(currentSum, 0) + 1)
+        if (currentSum !in sumCounts) {
+            sumCounts[currentSum] = 0
+        }
+        sumCounts[currentSum] = sumCounts[currentSum]!! + 1
 
-        pathSumHelper(node.left, currentSum, newSumCounts, treeInfo, targetSum)
-        pathSumHelper(node.right, currentSum, newSumCounts, treeInfo, targetSum)
+        pathSumHelper(node.left, currentSum, sumCounts, treeInfo, targetSum)
+        pathSumHelper(node.right, currentSum, sumCounts, treeInfo, targetSum)
+
+        sumCounts[currentSum] = sumCounts[currentSum]!! - 1
     }
 }
 
