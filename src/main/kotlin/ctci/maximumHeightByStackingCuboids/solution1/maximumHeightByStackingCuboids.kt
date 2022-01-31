@@ -6,13 +6,8 @@ class Solution {
     fun maxHeight(cuboids: Array<IntArray>): Int {
         val sortedCuboids = cuboids.map { cuboid -> cuboid.sorted() }.toMutableList()
         sortedCuboids.sortWith (Comparator<List<Int>> { cuboid1, cuboid2 ->
-            if (cuboid1[0] != cuboid2[0]) {
-                cuboid1[0] - cuboid2[0]
-            } else if (cuboid1[1] != cuboid2[1]) {
-                cuboid1[1] - cuboid2[1]
-            } else {
-                cuboid1[2] - cuboid2[2]
-            }
+            // it is obvious that if one cube can stack on the other cube that means its height, width, length are all larger than the other one.
+            cuboid1.sum().compareTo(cuboid2.sum())
         })
 
         val heights = sortedCuboids.map { it[2] }.toMutableList()
