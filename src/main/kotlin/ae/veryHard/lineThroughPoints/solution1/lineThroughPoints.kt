@@ -1,67 +1,66 @@
 package ae.veryHard.lineThroughPoints.solution1
 
+import kotlin.math.abs
 import kotlin.math.max
 
-fun lineThroughPoints(points: List<List<Int>>): Int {
-    var maxPointsThroughLines = 1
+class Solution {
+    fun maxPoints(points: Array<IntArray>): Int {
+        var maxPoints = 1
 
-    points.forEachIndexed { i, p0 ->
+        for (i in 0 .. points.lastIndex) {
+            // Create a brand new map to store slopes only for
+            // lines which include this P0.
+            // In this way if we find multiple pairs
+            // having the same slope we know that all those points
+            // lie on the same line because they all
+            // pass through a common point p0.
+            val slopes = mutableMapOf<String, Int>()
+            val p1 = points[i]
 
-        // Create a brand new map to store slopes only for
-        // lines which include this P0.
-        // In this way if we find multiple pairs
-        // having the same slope we know that all those points
-        // lie on the same line because they all
-        // pass through a common point p0.
-        val slopes = mutableMapOf<String, Int>()
+            for (j in 0 .. points.lastIndex) {
 
-        for (j in i + 1 .. points.lastIndex) {
+                if (i == j) continue
 
-            val p1 = points[j]
+                val p2 = points[j]
+                val (rise, run) = getSlope(p1, p2)
+                val slopeKey = getSlopeKey(rise, run)
 
-            val slope = getSlopeBetweenPoints(p0, p1)
-            val (rise, run) = slope
-            val slopeKey = getSlopeKey(rise, run)
+                if (slopeKey !in slopes) {
+                    slopes[slopeKey] = 1
+                }
+                slopes[slopeKey] = slopes[slopeKey]!! + 1
 
-            if (!slopes.containsKey(slopeKey)) {
-                slopes[slopeKey] = 1
+                maxPoints = max(maxPoints, slopes[slopeKey]!!)
             }
-            slopes[slopeKey] = slopes[slopeKey]!! + 1
         }
 
-        getMaxValueFromMap(slopes)?.let { maxValue ->
-            maxPointsThroughLines = max(maxPointsThroughLines, maxValue)
-        }
+        return maxPoints
     }
 
-    return maxPointsThroughLines
-}
+    fun getSlope(p1: IntArray, p2: IntArray): Pair<Int, Int> {
+        val (p1X, p1Y) = p1
+        val (p2X, p2Y) = p2
 
-fun getMaxValueFromMap(slopes: Map<String, Int>) =
-    slopes.values.maxOrNull()
+        var rise = p1Y - p2Y
+        var run  = p1X - p2X
 
-fun getSlopeBetweenPoints(p0: List<Int>, p1: List<Int>): List<Int> {
-    val (p0X, p0Y) = p0
-    val (p1X, p1Y) = p1
+        val gcd = findGcd(abs(rise), abs(run))
 
-    var rise = p1Y - p0Y
-    var run = p1X - p0X
-    val gcd = findGcd(rise, run)
+        rise /= gcd
+        run  /= gcd
 
-    rise /= gcd
-    run /= gcd
-
-    if (run < 0) {
-        return listOf(-rise, -run)
+        return if (run < 0) -rise to -run else rise to run
     }
 
-    return listOf(rise, run)
-}
+    fun getSlopeKey(rise: Int, run: Int): String {
+        return "$rise|$run"
+    }
 
-fun findGcd(a: Int, b: Int): Int {
-    if (a == 0) return b
-    if (b == 0) return a
-    return findGcd(b, a % b)
-}
+    fun findGcd(a: Int, b: Int): Int {
+        if (a == 0) return b
 
-fun getSlopeKey(rise: Int, run: Int) = "$rise|$run"
+        if (b == 0) return a
+
+        return findGcd(b, a % b)
+    }
+}
