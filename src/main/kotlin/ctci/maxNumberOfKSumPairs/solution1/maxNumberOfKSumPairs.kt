@@ -6,9 +6,11 @@ class Solution {
         var operationCount = 0
 
         for (num in nums) {
-            if ((k - num) in seen && seen[k - num]!! > 0) {
+            val remaining = k - num
+
+            if (remaining in seen && seen[remaining]!! > 0) {
                 operationCount += 1
-                seen[k - num] = seen[k - num]!! - 1
+                seen[remaining] = seen[remaining]!! - 1
             } else {
                 if (num !in seen) {
                     seen[num] = 0
