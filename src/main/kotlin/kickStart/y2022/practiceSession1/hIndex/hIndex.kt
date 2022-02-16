@@ -1,6 +1,6 @@
 package kickStart.y2022.practiceSession1.hIndex
 
-import kotlin.math.min
+import java.util.*
 
 fun parseDataAndCalculateHIndex() {
     val numTests = readLine()!!.toInt()
@@ -14,23 +14,20 @@ fun parseDataAndCalculateHIndex() {
 }
 
 fun calculateHIndexes(citations: List<Int>): List<Int> {
-    val runningCounts = MutableList(citations.size + 1) { 0 }
+    var runningHIndex = 1
+    val heap = PriorityQueue<Int>()
 
-    return citations.mapIndexed { idx, currentCitationCount ->
-        val citationNumber = idx + 1
+    return citations.map { citation ->
+        heap.add(citation)
 
-        val roundedCitationCount = min(currentCitationCount, citations.size)
-        for (currentValue in roundedCitationCount downTo 1) {
-            runningCounts[currentValue] += 1
+        while (heap.isNotEmpty() && heap.peek() <= runningHIndex) {
+            heap.poll()
         }
 
-        var hIndex = 0
-        for (currentValue in 1 .. citationNumber) {
-            if (runningCounts[currentValue] >= currentValue) {
-                hIndex = currentValue
-            }
+        if (heap.size == runningHIndex + 1) {
+            runningHIndex += 1
         }
 
-        hIndex
+        runningHIndex
     }
 }
