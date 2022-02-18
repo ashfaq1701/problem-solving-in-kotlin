@@ -1,5 +1,5 @@
-import kickStart.y2022.practiceSession1.hIndex.parseDataAndCalculateHIndex
+import kickStart.y2022.practiceSession1.milkTea.parseAndFindMinComplaints
 
 fun main(args: Array<String>) {
-    parseDataAndCalculateHIndex()
+    parseAndFindMinComplaints()
 }
