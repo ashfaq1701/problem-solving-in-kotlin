@@ -24,8 +24,8 @@ fun calculateHIndexes(citations: List<Int>): List<Int> {
             heap.poll()
         }
 
-        if (heap.size == runningHIndex + 1) {
-            runningHIndex += 1
+        if (heap.size > runningHIndex) {
+            runningHIndex = heap.size
         }
 
         runningHIndex
