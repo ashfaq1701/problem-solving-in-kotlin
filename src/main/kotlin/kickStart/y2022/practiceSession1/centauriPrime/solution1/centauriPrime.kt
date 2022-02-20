@@ -1,4 +1,4 @@
-package kickStart.y2022.practiceSession1.centauriPrime
+package kickStart.y2022.practiceSession1.centauriPrime.solution1
 
 fun findRulers() {
     val vowels = setOf('a', 'e', 'i', 'o', 'u')

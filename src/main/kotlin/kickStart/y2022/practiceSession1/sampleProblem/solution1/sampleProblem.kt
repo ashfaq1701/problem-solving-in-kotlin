@@ -1,4 +1,4 @@
-package kickStart.y2022.practiceSession1.sampleProblem
+package kickStart.y2022.practiceSession1.sampleProblem.solution1
 
 fun distributeCandies() {
     val numTestCases = readLine()!!.toInt()

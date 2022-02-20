@@ -1,4 +1,4 @@
-package kickStart.y2022.practiceSession1.milkTea.solution3
+package kickStart.y2022.practiceSession1.milkTea.solution2
 
 import kotlin.math.min
 

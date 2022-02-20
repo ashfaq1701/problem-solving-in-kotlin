@@ -1,4 +1,4 @@
-package kickStart.y2022.practiceSession1.hIndex
+package kickStart.y2022.practiceSession1.hIndex.solution1
 
 import java.util.*
 
