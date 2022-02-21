@@ -29,19 +29,19 @@ class RangeQuery(private val matrix: List<List<Int>>) {
         aux.map { it.toList() }
     }
 
-    fun query(topR: Int, leftCol: Int, bottomR: Int, rightC: Int): Int {
+    fun query(topR: Int, leftC: Int, bottomR: Int, rightC: Int): Int {
         var sum = auxMatrix[bottomR][rightC]
 
         if (topR > 0) {
             sum -= auxMatrix[topR - 1][rightC]
         }
 
-        if (leftCol > 0) {
-            sum -= auxMatrix[bottomR][leftCol - 1]
+        if (leftC > 0) {
+            sum -= auxMatrix[bottomR][leftC - 1]
         }
 
-        if (topR > 0 && leftCol > 1) {
-            sum += auxMatrix[topR - 1][leftCol - 1]
+        if (topR > 0 && leftC > 0) {
+            sum += auxMatrix[topR - 1][leftC - 1]
         }
 
         return sum
