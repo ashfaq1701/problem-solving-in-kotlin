@@ -1,4 +1,4 @@
-package facebook.recommendation.quickSort2.solution1
+package commonAlgo.quickSort
 
 fun quickSort(arr: Array<Int>, start: Int, end: Int) {
     if (start >= end) return
@@ -29,18 +29,10 @@ fun quickSort(arr: Array<Int>, start: Int, end: Int) {
         quickSort(arr, right + 1, end)
         quickSort(arr, start, right - 1)
     }
-
-    println(arr.sliceArray(start .. end).toList().joinToString(" "))
 }
 
 fun swap(arr: Array<Int>, x: Int, y: Int) {
     arr[x] = arr[y].also {
         arr[y] = arr[x]
     }
-}
-
-fun main(args: Array<String>) {
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }.toTypedArray()
-    quickSort(arr, 0, arr.lastIndex)
 }
