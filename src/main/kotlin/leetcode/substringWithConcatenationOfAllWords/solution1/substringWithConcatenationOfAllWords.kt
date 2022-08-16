@@ -22,28 +22,61 @@ class Solution {
 
         val result = mutableListOf<Int>()
 
-        for (i in 0 .. s.length - substrLen) {
-            if (contains(i, s)) {
-                result.add(i)
-            }
+        for (i in 0 until singleWordLen) {
+            slidingWindowHelper(i, s, result)
         }
 
         return result
     }
 
-    private fun contains(i: Int, s: String): Boolean {
-        val copiedWordCounts = wordCounts.toMutableMap()
+    fun slidingWindowHelper(start: Int, s: String, result: MutableList<Int>) {
+        var left = start
+        var right = left
+        val wordsFound = mutableMapOf<String, Int>()
+        var wordsUsed = 0
+        var excessWords = false
 
-        for (j in i until i + substrLen step singleWordLen) {
-            val potentialWord = s.substring(j, j + singleWordLen)
+        while (right <= s.length - singleWordLen) {
 
-            if (potentialWord !in copiedWordCounts || copiedWordCounts[potentialWord]!! == 0) {
-                return false
+            val sub = s.substring(right, right + singleWordLen)
+
+            if (sub !in wordCounts) {
+                wordsFound.clear()
+                wordsUsed = 0
+                excessWords = false
+                left = right + singleWordLen
+            } else {
+
+                while (right - left == substrLen || excessWords) {
+                    val leftMostWord = s.substring(left, left + singleWordLen)
+                    left += singleWordLen
+
+                    if (wordsFound[leftMostWord]!! > wordCounts[leftMostWord]!!) {
+                        excessWords = false
+                    } else {
+                        wordsUsed -= 1
+                    }
+
+                    wordsFound[leftMostWord] = wordsFound[leftMostWord]!! - 1
+                }
+
+                if (sub !in wordsFound) {
+                    wordsFound[sub] = 0
+                }
+                wordsFound[sub] = wordsFound[sub]!! + 1
+
+                if (wordsFound[sub]!! <= wordCounts[sub]!!) {
+                    wordsUsed += 1
+                } else {
+                    excessWords = true
+                }
+
+                if (wordsUsed == countWords) {
+                    result.add(left)
+                }
             }
 
-            copiedWordCounts[potentialWord] = copiedWordCounts[potentialWord]!! - 1
+            right += singleWordLen
         }
-
-        return true
     }
 }
